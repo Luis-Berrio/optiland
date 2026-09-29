@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
+
+    /* ─── Futuristic palette ─── */
+    --neon-cyan:   180 100% 55%;
+    --neon-purple: 270 100% 65%;
+    --neon-pink:   320 100% 65%;
+    --neon-blue:   220 100% 60%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html, body {
+    /* overflow-x: clip NO rompe position: sticky (a diferencia de hidden) */
+    overflow-x: clip;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   FUTURISTIC UTILITIES
+   ══════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  /* Gradient text */
+  .text-gradient {
+    background: linear-gradient(135deg,
+      hsl(var(--neon-blue))   0%,
+      hsl(var(--neon-purple)) 50%,
+      hsl(var(--neon-pink))   100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-cyan {
+    background: linear-gradient(135deg,
+      hsl(var(--neon-cyan))   0%,
+      hsl(var(--neon-blue))   100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+  .glass-dark {
+    background: rgba(15, 15, 25, 0.6);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Animated mesh gradient bg */
+  .mesh-bg {
+    background-color: #0a0118;
+    background-image:
+      radial-gradient(at 20% 15%, hsla(270, 100%, 55%, 0.35) 0px, transparent 55%),
+      radial-gradient(at 80% 20%, hsla(220, 100%, 50%, 0.30) 0px, transparent 55%),
+      radial-gradient(at 50% 80%, hsla(320, 100%, 55%, 0.25) 0px, transparent 55%),
+      radial-gradient(at 10% 90%, hsla(180, 100%, 50%, 0.20) 0px, transparent 50%);
+  }
+
+  /* Grid overlay */
+  .grid-overlay {
+    background-image:
+      linear-gradient(rgba(120, 120, 200, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120, 120, 200, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Glow rings */
+  .glow-primary {
+    box-shadow:
+      0 0 0 1px rgba(120, 80, 255, 0.3),
+      0 0 24px 2px rgba(120, 80, 255, 0.25),
+      0 0 60px 4px rgba(80, 150, 255, 0.15);
+  }
+  .glow-hover:hover {
+    box-shadow:
+      0 0 0 1px rgba(120, 80, 255, 0.5),
+      0 0 32px 4px rgba(120, 80, 255, 0.35),
+      0 0 80px 8px rgba(80, 150, 255, 0.25);
+  }
+
+  /* Card tilt container */
+  .tilt-card {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    will-change: transform;
+  }
+
+  /* Shine sweep */
+  .shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 80%);
+    transform: translateX(-120%);
+    transition: transform 0.9s ease;
+    pointer-events: none;
+  }
+  .shine:hover::after { transform: translateX(120%); }
+
+  /* Floating blobs keyframe */
+  @keyframes blob-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(30px, -40px) scale(1.08); }
+    66%      { transform: translate(-25px, 30px) scale(0.95); }
+  }
+  .animate-blob { animation: blob-drift 18s ease-in-out infinite; }
+
+  @keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(120, 80, 255, 0.5); }
+    70%  { box-shadow: 0 0 0 18px rgba(120, 80, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(120, 80, 255, 0); }
+  }
+  .animate-pulse-ring { animation: pulse-ring 2.2s ease-out infinite; }
+
+  @keyframes scanline {
+    0%   { transform: translateY(-100%); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(400%); opacity: 0; }
+  }
+  .animate-scanline { animation: scanline 3.5s ease-in-out infinite; }
+
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  .animate-float { animation: float-y 5s ease-in-out infinite; }
+
+  /* Radial spotlight on card */
+  .spotlight {
+    background:
+      radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+                      rgba(120, 80, 255, 0.15) 0%,
+                      transparent 45%);
+  }
+
+  /* Hide scrollbar but keep scroll */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
